@@ -8,6 +8,7 @@ const parentDir = '/Users/Stephen/Documents/Freelance/Local Repositories'; // Ch
 const watcher = chokidar.watch(`${parentDir}/**/*`, {
     persistent: true,
     ignoreInitial: true,
+    ignored: /(^|[\/\\])\.git/, // Ignore the .git directory
 });
 
 watcher.on('all', (event, path) => {
