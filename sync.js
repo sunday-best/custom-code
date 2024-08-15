@@ -12,6 +12,11 @@ const watcher = chokidar.watch(`${parentDir}/**/*`, {
 });
 
 watcher.on('all', (event, path) => {
+    // Ignore changes to the .git directory
+    if (path.includes('.git')) {
+        return;
+    }
+
     console.log(`Detected change: ${event} on ${path}`); // Log detected changes
     exec(`cd "${parentDir}" && git add . && git commit -m "Auto-commit: ${event} on ${path}" && git push`, (err, stdout, stderr) => {
         if (err) {
